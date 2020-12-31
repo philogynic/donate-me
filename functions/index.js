@@ -16,7 +16,7 @@ exports.sayHello = functions.https.onCall((data, context) => {
 
 const midtransClient = require('midtrans-client');
 // Create Snap API instance
-exports.snapTransaction = functions.https.onCall((data, context) => {
+exports.snapTransaction = functions.https.onCall(async (data, context) => {
     let snap = new midtransClient.Snap({
         // Set to true if you want Production Environment (accept real transaction).
         isProduction : false,
@@ -39,16 +39,18 @@ exports.snapTransaction = functions.https.onCall((data, context) => {
         }
     };
 
-    snap.createTransaction(parameter)
+    transactionToken = snap.createTransaction(parameter)
         .then((transaction)=>{
             // transaction token
             const transactionToken = transaction.token;
             console.log('transactionToken:',transactionToken);
+            return transactionToken
         })
         .catch((err) => {
             console.log(err.message)
         })
     
+    return transactionToken
 })
 
 
