@@ -23,9 +23,11 @@ exports.snapTransaction = functions.https.onCall(async (data, context) => {
         serverKey : 'SB-Mid-server-RPIkHxFpG3BBH1zazgRyYwEd'
     });
 
+    const number = Math.round(Math.random() * 1000)
+
     let parameter = {
         "transaction_details": {
-            "order_id": "YOUR-ORDERID-123456",
+            "order_id": "YOUR-ORDERID-" + number,
             "gross_amount": 10000
         },
         "credit_card":{

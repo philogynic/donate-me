@@ -37,7 +37,9 @@ const App = () => {
     })
     snapTransaction().then(result => {
       console.log(result.data)
+      window.snap.pay(result.data)
     })
+
   }
   
 
